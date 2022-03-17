@@ -1,17 +1,30 @@
-function add(firstNumber, secondNumber){
-    return firstNumber + secondNumber;
+function add(firstNum, secondNum){
+    return firstNum + secondNum;
 }
-function subtract(firstNumber, secondNumber){
-    return firstNumber - secondNumber;
+function subtract(firstNum, secondNum){
+    return firstNum - secondNum;
 }
-function multiply(firstNumber,secondNumber){
-    return firstNumber * secondNumber;
+function multiply(firstNum,secondNum){
+    return firstNum * secondNum;
 }
-function divide(firstNumber,secondNumber){
-    return firstNumber / secondNumber;
+function divide(firstNum,secondNum){
+    return firstNum / secondNum;
 }
 
-console.log(add(1,2));
-console.log(subtract(1,2));
-console.log(multiply(1,2));
-console.log(divide(1,2));
+
+function operate (operator, firstNumber, secondNumber){
+    switch (operator){
+        case 'add':
+            return add(firstNumber,secondNumber);
+        case 'subtract':
+            return subtract(firstNumber,secondNumber);
+        case 'multiply':
+            return multiply(firstNumber,secondNumber);
+        case 'divide':
+            return divide(firstNumber, secondNumber);
+        default:
+            alert("Something went wrong...")
+    }
+}
+
+console.log(operate('multiply', 1, 2));
