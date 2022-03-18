@@ -16,13 +16,13 @@ function divide(firstNum,secondNum){
  * pressed. */
 function operate (operator, firstNumber, secondNumber){
     switch (operator){
-        case 'add':
+        case '+':
             return add(firstNumber,secondNumber);
-        case 'subtract':
+        case '-':
             return subtract(firstNumber,secondNumber);
-        case 'multiply':
+        case 'x':
             return multiply(firstNumber,secondNumber);
-        case 'divide':
+        case '/':
             return divide(firstNumber, secondNumber);
         default:
             alert("Something went wrong...")
@@ -33,13 +33,30 @@ function operate (operator, firstNumber, secondNumber){
 /**Add event Listeners to buttons to call correct functions */
 const buttons = document.querySelectorAll("button");
 buttons.forEach(button=>button.addEventListener('click',(e)=>{
-    populateDisplay(e.target.textContent);
+    checkInput(e);
 }));
 
-/**Change screen display with buttons that were pressed */
-function populateDisplay(text){
-    console.log(text);
-    const screen = document.querySelector(".display");
-    screen.textContent = text;
+let array = [];
 
+/**Change screen display with buttons that were pressed */
+function populateDisplay(arrayDisplay){
+    const screen = document.querySelector(".display");
+    screen.textContent
+}
+ /**Check input from user and determine what to do with it */
+function checkInput(input){
+    if(input.target.className=== 'clear'){
+        array =[];
+        return;
+    }
+    if(array.length===3 && input.target.className === 'equals'){
+        console.log(operate(array[1],array[0],array[2]));
+    }else if(array.length ===0 && input.target.className !== 'operator'){
+        array.push(input.target.textContent);
+    }else if(array.length ===1 && input.target.className!=='number'){
+        array.push(input.target.textContent);
+    }else if(array.length ===2 && input.target.className !== 'operator'){
+        array.push(input.target.textContent);
+    }
+    populateDisplay(array);
 }
