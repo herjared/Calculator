@@ -1,3 +1,4 @@
+
 function add(firstNum, secondNum){
     return firstNum + secondNum;
 }
@@ -11,7 +12,8 @@ function divide(firstNum,secondNum){
     return firstNum / secondNum;
 }
 
-
+/**Call function depending on what button the user pressed and what numbers they
+ * pressed. */
 function operate (operator, firstNumber, secondNumber){
     switch (operator){
         case 'add':
@@ -27,4 +29,7 @@ function operate (operator, firstNumber, secondNumber){
     }
 }
 
-console.log(operate('multiply', 1, 2));
+const buttons = document.querySelectorAll("button");
+buttons.forEach(button=>button.addEventListener('click',(e)=>{
+    console.log(e.target.textContent);
+}));
