@@ -29,7 +29,17 @@ function operate (operator, firstNumber, secondNumber){
     }
 }
 
+
+/**Add event Listeners to buttons to call correct functions */
 const buttons = document.querySelectorAll("button");
 buttons.forEach(button=>button.addEventListener('click',(e)=>{
-    console.log(e.target.textContent);
+    populateDisplay(e.target.textContent);
 }));
+
+/**Change screen display with buttons that were pressed */
+function populateDisplay(text){
+    console.log(text);
+    const screen = document.querySelector(".display");
+    screen.textContent = text;
+
+}
