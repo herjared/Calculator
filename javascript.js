@@ -38,10 +38,12 @@ buttons.forEach(button=>button.addEventListener('click',(e)=>{
     checkInput(e);
 }));
 
-let array1 = [];
-let array2 = [];
-let array3 = [];
-let array4 = [];
+/**Create holders for all buttons inputs that way they can be used again or
+ * saved for the current operation */
+let firstHolder = [];
+let operatorHolder = [];
+let secondHolder = [];
+let answerHolder = [];
 
 /**Change screen display with buttons that were pressed */
 function populateDisplay(arrayDisplay){
@@ -51,52 +53,71 @@ function populateDisplay(arrayDisplay){
 }
  /**Check input from user and determine what to do with it */
 function checkInput(input){
+
+    /**if user clicks clear button it erases all saved data */
     if(input.target.className=== 'clear'){
-        array1 = [];
-        array2 = [];
-        array3 = [];
-        array4 =[];
-        populateDisplay(array1)
+        firstHolder = [];
+        operatorHolder = [];
+        secondHolder = [];
+        answerHolder =[];
+        populateDisplay(firstHolder)
         return;
     }
-    if(input.target.className == 'equals' && array3.length >0){
-        equals(array2, array1,array3);
+
+    /**if user clicks equals and there exists a number in the secondHolder then
+     * perform operation*/
+    if(input.target.className == 'equals' && secondHolder.length >0){
+        equals(operatorHolder, firstHolder,secondHolder);
+        return;
     }
-    if(input.target.className == 'number' && array2.length === 0 && array3.length ===0){
-        if(array4.length>0){
-            array4=[];
+    /** If a number is pressed check if its a fresh calculation or a
+     * continuation of a previous operation. If user clicks a number before an
+     * operation has been assigned it will delete the previous answer. Start
+     * creating firstHolder depending on answer.*/
+    if(input.target.className == 'number' && operatorHolder.length === 0 && secondHolder.length ===0){
+        if(answerHolder.length>0){
+            answerHolder=[];
         }
-        array1.push(input.target.textContent);
-        populateDisplay(array1);
+        firstHolder.push(input.target.textContent);
+        populateDisplay(firstHolder);
         return;
     }
+    /**Once an operator is clicked check if there are two numbers ready to be
+     * prepared for operation. If not delete previous operation and push in the
+     * new one*/
     if(input.target.className == 'operator'){
-        if(array1.length>0 && array3.length){
-            equals(array2, array1,array3);
+        if(firstHolder.length>0 && secondHolder.length>0){
+            equals(operatorHolder, firstHolder,secondHolder);
         }
-        array2.pop();
-        array2.push(input.target.textContent);
+        operatorHolder.pop();
+        operatorHolder.push(input.target.textContent);
         return;
     }
-    if(input.target.className == 'number' && array2.length > 0){
-        if(array1.length === 0){
-            array1 = array4;
+
+    /**Checks if there is a number in the firstHolder. If not then use previous
+     * answer as that number. Start creating second number depending on user
+     * input */
+    if(input.target.className == 'number' && operatorHolder.length > 0){
+        if(firstHolder.length === 0){
+            firstHolder = answerHolder;
         }
-        array3.push(input.target.textContent);
-        populateDisplay(array3);
+        secondHolder.push(input.target.textContent);
+        populateDisplay(secondHolder);
         return;
     }
 }
 
-
+/**Equals prepares the strings for the incoming operation. After operation is
+ * done display is updated and answer is saved while the rest of holders are
+ * cleared for new inputs */
  function equals(operator,firstNum,secondNum){
     let num1 = firstNum.join('');
     let num2 = secondNum.join('');
     let op = operator.join('');
     let answer = [operate(op,num1,num2)];
     populateDisplay(answer);
-    array1=[];
-    array2=[];
-    array3=[];
-    array4=answer;
+    firstHolder=[];
+    operatorHolder=[];
+    secondHolder=[];
+    answerHolder=answer;
  }
