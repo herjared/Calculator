@@ -32,6 +32,7 @@ function operate (operator, firstNumber, secondNumber){
         case '/':
             return divide(first, second);
         default:
+            clear();
             alert("Something went wrong...")
     }
 }
@@ -63,9 +64,7 @@ function checkInput(input){
     if(input.target.className=== 'clear'){
         clear();
     }
-    if(input.target.className=== 'decimal'){
-
-    }
+    
     /**if user clicks equals and there exists a number in the secondHolder then
      * perform operation*/
     if(input.target.className == 'equals' && secondHolder.length >0){
@@ -109,6 +108,10 @@ function checkInput(input){
         populateDisplay(secondHolder);
         return;
     }
+
+    if(input.target.className=== 'decimal'){
+        decimalAdder();
+    }
 }
 
 /**Equals prepares the strings for the incoming operation. After operation is
@@ -134,4 +137,22 @@ function checkInput(input){
     answerHolder =[];
     populateDisplay(firstHolder)
     return;
+ }
+ function decimalAdder(){
+    if(operatorHolder.length === 0 && secondHolder.length ===0){
+        if(firstHolder.includes('.')){
+            return;
+        }else{
+            firstHolder.push('.');
+            populateDisplay(firstHolder);
+        }
+    }
+    if(operatorHolder.length > 0){
+        if(secondHolder.includes('.')){
+            return;
+        }else{
+            secondHolder.push('.');
+            populateDisplay(secondHolder);
+        }
+    }
  }
