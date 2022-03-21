@@ -9,14 +9,19 @@ function multiply(firstNum,secondNum){
     return firstNum * secondNum;
 }
 function divide(firstNum,secondNum){
+    if(secondNum === 0){
+        clear();
+        alert("You cant divide by 0 silly");
+        return 0;
+    }
     return firstNum / secondNum;
 }
 
 /**Call function depending on what button the user pressed and what numbers they
  * pressed. */
 function operate (operator, firstNumber, secondNumber){
-    let first = parseInt(firstNumber);
-    let second = parseInt(secondNumber);
+    let first = parseFloat(firstNumber);
+    let second = parseFloat(secondNumber);
     switch (operator){
         case '+':
             return add(first,second);
@@ -56,20 +61,18 @@ function checkInput(input){
 
     /**if user clicks clear button it erases all saved data */
     if(input.target.className=== 'clear'){
-        firstHolder = [];
-        operatorHolder = [];
-        secondHolder = [];
-        answerHolder =[];
-        populateDisplay(firstHolder)
-        return;
+        clear();
     }
+    if(input.target.className=== 'decimal'){
 
+    }
     /**if user clicks equals and there exists a number in the secondHolder then
      * perform operation*/
     if(input.target.className == 'equals' && secondHolder.length >0){
         equals(operatorHolder, firstHolder,secondHolder);
         return;
     }
+
     /** If a number is pressed check if its a fresh calculation or a
      * continuation of a previous operation. If user clicks a number before an
      * operation has been assigned it will delete the previous answer. Start
@@ -82,6 +85,7 @@ function checkInput(input){
         populateDisplay(firstHolder);
         return;
     }
+
     /**Once an operator is clicked check if there are two numbers ready to be
      * prepared for operation. If not delete previous operation and push in the
      * new one*/
@@ -111,13 +115,23 @@ function checkInput(input){
  * done display is updated and answer is saved while the rest of holders are
  * cleared for new inputs */
  function equals(operator,firstNum,secondNum){
-    let num1 = firstNum.join('');
-    let num2 = secondNum.join('');
+    let numOne = firstNum.join('');
+    let numTwo = secondNum.join('');
     let op = operator.join('');
-    let answer = [operate(op,num1,num2)];
+    let answer = [operate(op,numOne,numTwo)];
     populateDisplay(answer);
     firstHolder=[];
     operatorHolder=[];
     secondHolder=[];
     answerHolder=answer;
+ }
+
+ /**Clears all data */
+ function clear(){
+    firstHolder = [];
+    operatorHolder = [];
+    secondHolder = [];
+    answerHolder =[];
+    populateDisplay(firstHolder)
+    return;
  }
