@@ -63,6 +63,7 @@ function checkInput(input){
     /**if user clicks clear button it erases all saved data */
     if(input.target.className=== 'clear'){
         clear();
+        return;
     }
     
     /**if user clicks equals and there exists a number in the secondHolder then
@@ -111,6 +112,7 @@ function checkInput(input){
 
     if(input.target.className=== 'decimal'){
         decimalAdder();
+        return;
     }
 }
 
@@ -138,6 +140,8 @@ function checkInput(input){
     populateDisplay(firstHolder)
     return;
  }
+ /**Adds decimal to number being worked on. Checks to make sure there isn't
+  * already a decimal added */
  function decimalAdder(){
     if(operatorHolder.length === 0 && secondHolder.length ===0){
         if(firstHolder.includes('.')){
