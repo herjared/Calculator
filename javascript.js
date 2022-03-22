@@ -144,6 +144,7 @@ function checkInput(input){
     populateDisplay(firstHolder)
     return;
  }
+ 
  /**Adds decimal to number being worked on. Checks to make sure there isn't
   * already a decimal added */
  function decimalAdder(){
@@ -164,6 +165,9 @@ function checkInput(input){
         }
     }
  }
+
+ /**Add negative to number being worked on. Removes or adds depending on if a
+  * negative exists already */
  function negativeAdder(){
     if(operatorHolder.length === 0 && secondHolder.length ===0){
         if(firstHolder[0] === '-'){
