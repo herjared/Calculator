@@ -1,0 +1,41 @@
+body{
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    height:500px;
+    width:250px;
+}
+
+.display{
+    font-size: 60px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.row{
+    display: flex;
+}
+
+button{
+    border: none;
+    background-color: lightgray;
+    border-radius: 20px;
+    font-size: 50px;
+    padding:8px;
+}
+
+.number{
+    background-color: grey;
+}
+
+.operator{
+    background-color:orange;
+}
+
+.equals{
+    flex:1;
+}
