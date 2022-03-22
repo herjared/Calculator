@@ -114,6 +114,10 @@ function checkInput(input){
         decimalAdder();
         return;
     }
+    if(input.target.className=== 'negative'){
+        negativeAdder();
+        return;
+    }
 }
 
 /**Equals prepares the strings for the incoming operation. After operation is
@@ -158,5 +162,23 @@ function checkInput(input){
             secondHolder.push('.');
             populateDisplay(secondHolder);
         }
+    }
+ }
+ function negativeAdder(){
+    if(operatorHolder.length === 0 && secondHolder.length ===0){
+        if(firstHolder[0] === '-'){
+            firstHolder.shift();
+        }else{
+            firstHolder.unshift('-');
+        }
+        populateDisplay(firstHolder);
+    }
+    if(operatorHolder.length >0){
+        if(secondHolder[0]=== '-'){
+            secondHolder.shift();
+        }else{
+            secondHolder.unshift('-');
+        }
+        populateDisplay(secondHolder);
     }
  }
